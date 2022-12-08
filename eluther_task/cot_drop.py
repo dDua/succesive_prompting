@@ -89,7 +89,6 @@ class DROP(Task):
     def has_test_docs(self):
         return False
 
-
     def _process_doc(self, doc):
         return {
             "id": doc["query_id"],
@@ -215,13 +214,6 @@ class DROP(Task):
 
     def doc_to_text(self, doc):
         return f"Passage: {doc['passage']}\nQuestion: {doc['question']}\nAnswer:"
-
-    def doc_to_text_decomp(self, doc):
-        fixed_hints = f"Passage: {doc['passage']}\nComplex: {doc['question']}\n"
-        input_str = fixed_hints
-        for dec_q, dec_a in doc["decomposition"]:
-            input_str = f"{input_str} Simple: {dec_q} Answer: {dec_a}\n"
-        return input_str
 
     def doc_to_target(self, doc):
         return " " + ", ".join(doc["answers"])
